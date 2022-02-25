@@ -17,6 +17,10 @@ wind_speed = input_data(1);
 wind_angle = input_data(2);
 optim_iterations = input_data(3);
 
+fprintf("wind_speed: %f", wind_speed);
+fprintf("wind_angle: %f", wind_angle);
+fprintf("optim_iterations: %f", optim_iterations);
+
 marker = fix(clock);
 marker_str = datestr(datetime('now'));
 

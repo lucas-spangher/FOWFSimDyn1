@@ -7,10 +7,12 @@ import sys
 
 wind_speed = np.array(list(range(5, 25)))
 angleRelX = np.array(list(range(-20, 20)))/2
-optim_iterations = np.array([1,1000])
+optim_iterations = np.array([1000, 1])
 
 index = pd.MultiIndex.from_product(
     [wind_speed.tolist(), angleRelX.tolist(), optim_iterations.tolist()])
 df = pd.DataFrame(index=index).reset_index()
+
+print(df.loc[sys.argv[1]])
 
 df.loc[sys.argv[1]].to_csv("matlab_data.csv", header = False)
