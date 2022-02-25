@@ -15,4 +15,4 @@ df = pd.DataFrame(index=index).reset_index()
 df["done"] = 0
 print(df)
 
-df.to_csv("matlab_data.csv", header = False)
+df.to_csv("matlab_data.csv", header=False, index=False)

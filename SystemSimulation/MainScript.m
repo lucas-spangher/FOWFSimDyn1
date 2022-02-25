@@ -12,7 +12,7 @@ set(0,'DefaultAxesFontSize',12);
 
 fprintf("starting simulation");
 
-input_data = csvread("matlab_data.csv", 0 ,1);
+input_data = csvread("matlab_data.csv");
 num_rows = size(input_data, 1);
 
 %sampling because i dont want to turn this whole script into a function
