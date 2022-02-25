@@ -17,6 +17,13 @@ num_rows = size(input_data, 1);
 
 %sampling because i dont want to turn this whole script into a function
 
+pause_seconds = randsample(5000, 1)
+pause_seconds = pause_seconds/1000
+pause(pause_seconds)
+
+input_data = csvread("matlab_data.csv");
+num_rows = size(input_data, 1);
+
 for i = 1:num_rows
     ind = randsample(num_rows, 1);
     fprintf("ind: %f", ind);
