@@ -10,6 +10,9 @@ set(0,'DefaultTextFontSize',12);
 set(0,'DefaultAxesFontSize',12);
 
 
+marker = fix(clock)
+marker_str = datestr(datetime('now'))
+
 %% Simulation settings
 % Simulation case
 Global.TurbDia = 126;
@@ -357,12 +360,14 @@ time = ans.tout;
 PosX = ans.PosX.signals.values;
 PosY = ans.PosY.signals.values;
 Power = ans.Power.signals.values;
+fprintf('PosX: %4f, PosY: %4f, Power: %4f', PosX, PosY);
 
 figure(1)
 
-subplot(3,1,1)
+a = subplot(3,1,1)
 for i = 1:Farm.NumTurb
-    stairs(time, PosX(:,i)); hold on;
+    ax = nexttile(a)
+    stairs(ax, time, PosX(:,i)); hold on;
 end
 title('Position X');
 xlabel('Time [s]');
@@ -370,6 +375,7 @@ ylabel('Position [m]');
 legend('Turbine1');
 grid on
 
+saveas(a, strcat("output_plots/", marker_str, "_plot1" , "png")
 
 subplot(3,1,2)
 for i = 1:Farm.NumTurb
