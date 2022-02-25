@@ -19,6 +19,7 @@ num_rows = size(input_data, 1);
 
 for i = 1:num_rows
     ind = randsample(num_rows, 1);
+    fprintf("ind: %f", ind);
     trial_row = input_data(ind, :);
     if trial_row(4) == 0
         trial_row(4) = 1;
@@ -27,10 +28,13 @@ for i = 1:num_rows
     end
 end
 
+writematrix(input_data, "matlab_data.csv")
+
 wind_speed = trial_row(1);
 wind_angle = trial_row(2);
 optim_iterations = trial_row(3);
 
+fprintf("ind: %f", ind);
 fprintf("wind_speed: %f", wind_speed);
 fprintf("wind_angle: %f", wind_angle);
 fprintf("optim_iterations: %f", optim_iterations);
