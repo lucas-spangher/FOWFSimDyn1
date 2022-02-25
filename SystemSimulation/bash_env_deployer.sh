@@ -26,6 +26,7 @@
 # Run 48 examples concurrently
 #SBATCH --array=0
 
-module load matlab/r2021b
+module load matlab/r2021a
+module load python/3.6
 python csv_initializer.py $1
 matlab -nosplash -nodesktop -r "run('/global/scratch/users/lucas_spangher/FOWFSimDyn1/SystemSimulation/MainScript.m'); exit;"
