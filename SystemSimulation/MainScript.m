@@ -9,9 +9,9 @@ set(0,'DefaultAxesFontName','Times New Roman');
 set(0,'DefaultTextFontSize',12);
 set(0,'DefaultAxesFontSize',12);
 
-
-marker = fix(clock)
-marker_str = datestr(datetime('now'))
+fprintf("starting simulation");
+marker = fix(clock);
+marker_str = datestr(datetime('now'));
 
 %% Simulation settings
 % Simulation case
@@ -43,7 +43,7 @@ Solver.RotorMomModel = 'Jimenez';
 
 % Fundamental sample time and impulse time setting
 SampleTime = 1;        %1
-timeEnd = 1500;         %2000 sec
+timeEnd = 500;         %2000 sec
 
 
 %%model selction
@@ -360,14 +360,18 @@ time = ans.tout;
 PosX = ans.PosX.signals.values;
 PosY = ans.PosY.signals.values;
 Power = ans.Power.signals.values;
-fprintf('PosX: %4f, PosY: %4f, Power: %4f', PosX, PosY);
+fprintf('PosX: ');
+fprintf('%3.2f,', PosX);
+fprintf('PosY: ');
+fprintf('%3.2f' PosY);
+fprintf('Power: ');
+fprintf('%4f', Power);
 
 figure(1)
 
 a = subplot(3,1,1)
 for i = 1:Farm.NumTurb
-    ax = nexttile(a)
-    stairs(ax, time, PosX(:,i)); hold on;
+    stairs(time, PosX(:,i)); hold on;
 end
 title('Position X');
 xlabel('Time [s]');
