@@ -26,7 +26,6 @@ for i = 1:num_rows
     end
 end
 
-
 wind_speed = trial_row(1);
 wind_angle = trial_row(2);
 optim_iterations = trial_row(3);
