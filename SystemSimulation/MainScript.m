@@ -396,7 +396,7 @@ fprintf('%3.2f', mean_posy);
 fprintf('Power: ');
 fprintf('%3.2f', mean_power);
 
-A = [wind_speed, wind_angle, mean_power, mean_posx, mean_posy]
+A = [ind, wind_speed, wind_angle, optim_iterations, mean_power, mean_posx, mean_posy]
 A1 = readmatrix('results.csv')
 
 A_full = [A1; A]
