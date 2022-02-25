@@ -12,7 +12,7 @@ optim_iterations = np.array([1000, 1])
 index = pd.MultiIndex.from_product(
     [wind_speed.tolist(), angleRelX.tolist(), optim_iterations.tolist()])
 df = pd.DataFrame(index=index).reset_index()
+df["done"] = 0
+print(df)
 
-ind = int(sys.argv[1])
-print(df.loc[ind])
-df.loc[ind].to_csv("matlab_data.csv", header = False)
+df.to_csv("matlab_data.csv", header = False)

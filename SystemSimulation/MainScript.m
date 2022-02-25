@@ -12,10 +12,24 @@ set(0,'DefaultAxesFontSize',12);
 fprintf("starting simulation");
 
 input_data = csvread("matlab_data.csv", 0 ,1);
+num_rows = size(input_data, 1);
 
-wind_speed = input_data(1);
-wind_angle = input_data(2);
-optim_iterations = input_data(3);
+%sampling because i dont want to turn this whole script into a function
+
+for i = 1:num_rows
+    ind = randsample(num_rows, 1);
+    trial_row = input_data(ind, :);
+    if trial_row(4) == 0
+        trial_row(4) = 1;
+        input_data(ind, :) = trial_row;
+        break
+    end
+end
+
+
+wind_speed = trial_row(1);
+wind_angle = trial_row(2);
+optim_iterations = trial_row(3);
 
 fprintf("wind_speed: %f", wind_speed);
 fprintf("wind_angle: %f", wind_angle);
