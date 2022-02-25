@@ -3,6 +3,7 @@ clear;
 clc;
 close all;
 format short g;
+rng("shuffle")
 set(0,'defaulttextinterpreter','latex');
 set(0,'DefaultTextFontname','Times New Roman');
 set(0,'DefaultAxesFontName','Times New Roman');
