@@ -363,7 +363,7 @@ Power = ans.Power.signals.values;
 fprintf('PosX: ');
 fprintf('%3.2f,', PosX);
 fprintf('PosY: ');
-fprintf('%3.2f' PosY);
+fprintf('%3.2f', PosY);
 fprintf('Power: ');
 fprintf('%4f', Power);
 
