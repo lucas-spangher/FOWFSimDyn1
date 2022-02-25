@@ -375,7 +375,7 @@ ylabel('Position [m]');
 legend('Turbine1');
 grid on
 
-saveas(a, strcat("output_plots/", marker_str, "_plot1" , "png")
+saveas(a, strcat("output_plots/", marker_str, "_plot1" , "png"));
 
 subplot(3,1,2)
 for i = 1:Farm.NumTurb
