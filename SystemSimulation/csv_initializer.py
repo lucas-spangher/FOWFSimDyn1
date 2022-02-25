@@ -13,6 +13,6 @@ index = pd.MultiIndex.from_product(
     [wind_speed.tolist(), angleRelX.tolist(), optim_iterations.tolist()])
 df = pd.DataFrame(index=index).reset_index()
 
-print(df.loc[sys.argv[1]])
-
-df.loc[sys.argv[1]].to_csv("matlab_data.csv", header = False)
+ind = int(sys.argv[1])
+print(df.loc[ind])
+df.loc[ind].to_csv("matlab_data.csv", header = False)
