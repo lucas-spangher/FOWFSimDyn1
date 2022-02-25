@@ -157,7 +157,7 @@ for TurbNumY = Farm.NumTurbY:-1:1
 end 
 
 % Transfom installation locations based on wind direction
-Farm.AngleRelX = 0; % deg
+Farm.AngleRelX = 0; % deg, will sample here 
 Farm.CoordTransMat = [
  cosd(Farm.AngleRelX) -sind(Farm.AngleRelX);
  sind(Farm.AngleRelX) cosd(Farm.AngleRelX)];
@@ -365,7 +365,7 @@ fprintf('%3.2f,', PosX);
 fprintf('PosY: ');
 fprintf('%3.2f', PosY);
 fprintf('Power: ');
-fprintf('%4f', Power);
+fprintf('%3.2f', Power);
 
 figure(1)
 
@@ -379,7 +379,7 @@ ylabel('Position [m]');
 legend('Turbine1');
 grid on
 
-saveas(a, strcat("output_plots/", marker_str, "_plot1" , "png"));
+saveas(a, strcat("output_plots/", marker_str, "_plot1.png"));
 
 subplot(3,1,2)
 for i = 1:Farm.NumTurb
