@@ -371,16 +371,17 @@ time = ans.tout;
 PosX = ans.PosX.signals.values;
 PosY = ans.PosY.signals.values;
 Power = ans.Power.signals.values;
-fprintf('PosX: ');
-fprintf('%3.2f,', PosX);
-fprintf('PosY: ');
-fprintf('%3.2f', PosY);
-fprintf('Power: ');
-fprintf('%3.2f', Power);
 
 mean_power = mean(sum(Power, 2))
 mean_posx = mean(mean(PosX))
 mean_posy = mean(mean(PosY))
+
+fprintf('PosX: ');
+fprintf('%3.2f,', mean_posx);
+fprintf('PosY: ');
+fprintf('%3.2f', mean_posy);
+fprintf('Power: ');
+fprintf('%3.2f', mean_power);
 
 A = [wind_speed, wind_angle, mean_power, mean_posx, mean_posy]
 A1 = readmatrix('results.csv')
