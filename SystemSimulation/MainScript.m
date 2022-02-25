@@ -10,6 +10,13 @@ set(0,'DefaultTextFontSize',12);
 set(0,'DefaultAxesFontSize',12);
 
 fprintf("starting simulation");
+
+input_data = csvread("matlab_data.csv", 0 ,1);
+
+wind_speed = input_data(1);
+wind_angle = input_data(2);
+optim_iterations = input_data(3);
+
 marker = fix(clock);
 marker_str = datestr(datetime('now'));
 
@@ -17,9 +24,9 @@ marker_str = datestr(datetime('now'));
 % Simulation case
 Global.TurbDia = 126;
 
-Global.MeanWindSpeed = 12;  %m/s
-Farm.SpacingX = 7*Global.TurbDia;    %downstream spacing, m
-Farm.SpacingY = 4*Global.TurbDia;
+Global.MeanWindSpeed = wind_speed;   %m/s can sample here 
+Farm.SpacingX = 7*Global.TurbDia;    %downstream spacing, m sample 
+Farm.SpacingY = 4*Global.TurbDia;    % sample 
 
 
 % Mesh settings
@@ -157,7 +164,7 @@ for TurbNumY = Farm.NumTurbY:-1:1
 end 
 
 % Transfom installation locations based on wind direction
-Farm.AngleRelX = 0; % deg, will sample here 
+Farm.AngleRelX = wind_angle; % deg, will sample here 
 Farm.CoordTransMat = [
  cosd(Farm.AngleRelX) -sind(Farm.AngleRelX);
  sind(Farm.AngleRelX) cosd(Farm.AngleRelX)];
@@ -214,7 +221,7 @@ end
   'StepTolerance',1e-16,...
   'FunctionTolerance',1e-16,...
   'MaxFunctionEvaluations',10000,...
-  'MaxIterations',10000,...
+  'MaxIterations',optim_iterations,...
   'OptimalityTolerance',1e-16);
  for i = 1:length(HorDistVec)
   if HorDistVec(i) <= Moor.HorDistCat
@@ -367,9 +374,21 @@ fprintf('%3.2f', PosY);
 fprintf('Power: ');
 fprintf('%3.2f', Power);
 
-figure(1)
+mean_power = mean(sum(Power, 2))
+mean_posx = mean(mean(PosX))
+mean_posy = mean(mean(PosY))
 
-a = subplot(3,1,1)
+A = [wind_speed, wind_angle, mean_power, mean_posx, mean_posy]
+A1 = readmatrix('results.csv')
+
+A_full = [A1; A]
+
+writematrix(A_full, 'results.csv')
+
+a = figure(1)
+
+subplot(3,1,1)
+
 for i = 1:Farm.NumTurb
     stairs(time, PosX(:,i)); hold on;
 end
@@ -378,8 +397,6 @@ xlabel('Time [s]');
 ylabel('Position [m]');
 legend('Turbine1');
 grid on
-
-saveas(a, strcat("output_plots/", marker_str, "_plot1.png"));
 
 subplot(3,1,2)
 for i = 1:Farm.NumTurb
@@ -408,3 +425,5 @@ Legend = cell(Farm.NumTurb,1);
  end
 legend(Legend);
 grid on
+
+saveas(a, strcat("output_plots/", marker_str, "_plot1.png"));
